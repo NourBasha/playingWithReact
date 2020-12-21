@@ -33,12 +33,19 @@ class Container1 extends Component {
     
     render(){
 
+            const text_input = 'text 1';
         return(
 
             <div> 
             <button onClick={ () => console.log(this.props.hamada)}> Get state </button>
             <button onClick={() => this.props.action1()}> Dispatch action 1 </button>
             <button onClick={() => this.props.action2()}> Dispatch action 2 </button>
+            <button onClick={() => this.props.action_creator1()}> Dispatch action creator 1 </button>
+            <button onClick={() => this.props.action_creator2()}> Dispatch action creator 2 </button>
+            <button onClick={() => this.props.action_creator3(text_input)}> Dispatch action creator 3 </button>
+            {this.props.mona
+            ? <h1>{this.props.mona}</h1>
+            : <h1>no value in mona</h1>}
             </div>
           
 
@@ -66,14 +73,18 @@ class Container1 extends Component {
 
 function mapStateToProps (state){
    return {
-    hamada : state.stateProp1
+    hamada : state.reducer1.stateProp1,
+    mona: state.user_reducer.user_input
    }
 }
 
 function mapDispatchToProps(dispatch){
     return {
        action1 : () => dispatch(ACTIONS.SUCCESS),
-       action2 : () => dispatch(ACTIONS.FAILURE)
+       action2 : () => dispatch(ACTIONS.FAILURE),
+       action_creator1 : () => dispatch(ACTIONS.success()),
+       action_creator2 : () => dispatch(ACTIONS.failure()),
+       action_creator3 : (text) => dispatch(ACTIONS.user_input(text))
     }
 }
 
